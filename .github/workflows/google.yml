@@ -1,0 +1,25 @@
+
+name: deploy-gke
+on: workflow_dispatch
+
+jobs:
+  deployment:
+    runs-on: 'ubuntu-latest'
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: 'Deploy'
+      uses: 'deliverybot/helm@v1'
+      with:
+        release: 'reverseapp'
+        namespace: 'default'
+        chart: 'deel'
+        token: '${{ github.token }}'
+        values: |
+          name: deel-app
+        value-files: >-
+        
+          "values.yaml"
+        
+      env:
+        KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'
