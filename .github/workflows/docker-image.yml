@@ -1,6 +1,5 @@
 name: deploy-deel
-on:
-  push: [flask]
+on: push
 
 env:
   APP_NAME: deel
