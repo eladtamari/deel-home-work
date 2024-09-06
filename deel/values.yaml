@@ -109,3 +109,5 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+DEPLOY_ENVIRONMENT: staging
