@@ -1,25 +1,27 @@
-# .github/workflows/deploy.yml
-name: deploy-gke
-on: workflow_dispatch
+name: deploy-deel
+on:
+  push: ['flask']
+
+env:
+  APP_NAME: deel
 
 jobs:
-  deployment:
-    runs-on: 'ubuntu-latest'
+  deploy-staging:
+    runs-on: ubuntu-latest
+    env:
+      DEPLOY_ENVIRONMENT: staging
     steps:
-    - uses: actions/checkout@v1
-
-    - name: 'Deploy'
-      uses: 'deliverybot/helm@v1'
-      with:
-        release: 'reverseapp'
-        namespace: 'default'
-        chart: 'deel'
-        token: '${{ github.token }}'
-        values: |
-          name: deel-app
-        value-files: >-
-        
-          "values.yaml"
-        
-      env:
-        KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'
+      -
+        uses: actions/checkout@v2
+      -
+        uses: jmagnusson/deploy-helm-gke-action@v1
+        with:
+          docker-image-repo: ${{ secrets.GITHUB_USERNAME }}/${{ secrets.GITHUB_TOKEN }}
+          docker-image-tag: ${{ github.sha }}
+          helm-release-name: ${{ env.APP_NAME }}
+          helm-chart-path: ./deel/${{ env.APP_NAME }}
+          #helm-vars-folder: helm_vars/${{ env.DEPLOY_ENVIRONMENT }}
+          gke-project: deel-home-task-1
+          gke-cluster: deel-cluster
+          gke-zone: us-east5-a
+          gke-sa-key: ${{ secrets.KUBECONFIG }}
