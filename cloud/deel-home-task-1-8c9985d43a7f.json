@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "deel-home-task-1",
+  "private_key_id": "8c9985d43a7fec88fd52d70bf44d3fbdf4e2cc0d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDCExcjBfNACKrS\n2l9Tv5tKgvSnjDjHzuQtFqVccwpDuTYZwfbK67vyIFV5HgXEkt3YbL+uwsGwR1XN\nIrtC9VZbqLKDo60XNrYtMwyjZwxJH/NjPy1dofLJu4Q4KgXqOUCqY8I+8gMZ89du\nX75scoN29Kg2db1K6i+78qHWn7u8nlK9nNcfrB6yRTSYIF9elm2m95y6/AhS0xwI\nevN3m1VfcbADNK5YfVg230vqDcaXr7RhRgKzkfF1BcCqG7VAVQ8RNfZOLyMDjLBS\nu7Po3EhDcpbTHN69Vl7Lmb5pS5955rjfke3UX3OZwi6P7k+WHqxdi1xmWtE4V34f\n+sbJ2nKzAgMBAAECggEAIKLvOB+PCYyrlWvNrhrBtaUSGX72KXu8WWy+gC6EYmEq\nHOjGZNeBsrUHSqfm1mjQT83x6iSsR8WnQyj9DsSNMjrLUmHbANVdi3pTPMNeiImL\n93uvWFicqJoVIRDID9xy6HSAPO+b3+hmqRQGxNv5Ca8Y/peMLqX1QwkJeDtCafR2\nggvOcHWJYA9BU5595XIzN9QvEqOOHeq36Rs7bKe5ZUh2eSetzd64NG1xtQTMtxCA\n2DqlP+lI7EiAfKUl9iuozAwhZVctJwjkDtXM522RE6CH+y2KBRxm+v26vNFWJyWC\n40zbpRTtrL7x0Nrg1JSlE44o9YlG/HY0+5XoD6kcIQKBgQD6XhRenG0RHT2fjMyf\nkvi0a1dWXJkjMfw9nTAK/5llQs3Zmuk0FkLnu4yGq7qRIa+pntLRF+KNaEdqGTY9\nO/cGOXoI/dNaQPft8SzPUrZxFduotigUejAVB7OjZrY1M5pI4RcRjPxyYxAp/J3x\nEl1YYmASd3KcH6CAzh+dMOAxwwKBgQDGcM7FlAp9twV1noGi8nmWh28mLaN5wXeo\n4bsWvgmmCVE4Rwc7yOrhZDgf2LxM2uYw4jEZEOgGhOThHrDdnFAfGjEyYljkd3Wh\nkNTLDZ+pY/P9/B9XAt3oCMcaF2r0T0XFJ1g0ennSF0DENtlOzTcscRgXF+ZQU4ZK\n4lbWrqs8UQKBgAGFPL5uWMM32D31zvBRJi2CUV925H8wOIXvRHFsp/PTegiORkhI\nslNR8kKHHHTxLW3sRv96E6gkL/rW+Fta198zzifr0rLDnj3Vrx37NJxvM4xMvuWQ\n8GXQTCj74LNmAtPaehdjMc1ICLsYi6UBJYv53Pd/vjRwhLsDhXGg8FudAoGBALfl\nxtk3DlneiIKtt7mIN8GWFR0uYjbtYbTyK+0xg8OJEumyeTOgSHtD4vcwZaBbo8Nd\net6d2khgU7OEO6fDukR4g2sL1RE026A0ld7u6y2RYYXYZjq+f2MO72Rwmz95T1Eb\n2xQXBFn8DptHsS7j4uOekxKjpV5/aQ5wnsUo7athAoGBAKVrOS94nwrZIN2FbRcy\n+zOBzckRKkVcr3+pVdfVSyRCWyferm4Wvz+Apn36CiyPmAHMfdSUsHgwmlQmvg5s\n5z/onlyJ40ox3zW1oOGez9fNxpRy3PDc3rzTuyknSp5rBzaakKsb7MbJneu3DSyr\nYE59kchP3IIhI4CNhiv5El1F\n-----END PRIVATE KEY-----\n",
+  "client_email": "deel-sa@deel-home-task-1.iam.gserviceaccount.com",
+  "client_id": "107004871414829606440",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/deel-sa%40deel-home-task-1.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
