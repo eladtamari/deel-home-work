@@ -18,7 +18,7 @@ jobs:
           docker-image-repo: ${{ secrets.GITHUB_USERNAME }}/${{ secrets.GITHUB_TOKEN }}
           docker-image-tag: ${{ github.sha }}
           helm-release-name: ${{ env.APP_NAME }}
-          helm-chart-path: ./deel/${{ env.APP_NAME }}
+          helm-chart-path: ./${{ env.APP_NAME }}
           #helm-vars-folder: helm_vars/${{ env.DEPLOY_ENVIRONMENT }}
           gke-project: deel-home-task-1
           gke-cluster: deel-cluster
