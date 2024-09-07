@@ -8,7 +8,7 @@ image:
   repository: 0254/deel-app
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
@@ -110,4 +110,4 @@ tolerations: []
 
 affinity: {}
 
-#DEPLOY_ENVIRONMENT:
+DEPLOY_ENVIRONMENT:
