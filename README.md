@@ -13,6 +13,11 @@
           --role="roles/iam.serviceAccountTokenCreator" \
           --member="principalSet://iam.googleapis.com/projects/<YOUR_PROJECT_NUMBER>/locations/global/workloadIdentityPools/github-actions-pool/attribute.repository/<YOUR_GITHUB_USERNAME>/<YOUR_REPO_NAME>"
 
+          gcloud projects add-iam-policy-binding deel-home-task-1 \
+          --member="serviceAccount:"github-actions-sa@deel-home-task-1.iam.gserviceaccount.com"" \
+          --role="roles/container.clusterAdmin"
+
+
 
 
 
