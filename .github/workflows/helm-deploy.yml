@@ -22,7 +22,10 @@ jobs:
           workload_identity_provider: 'projects/499613830332/locations/global/workloadIdentityPools/deel/providers/github'
           service_account: 'github-actions-sa@deel-home-task-1.iam.gserviceaccount.com'
       - name: 'setup cloud sdk'
-        uses: google-github-actions/setup-gcloud@v1
+        #uses: google-github-actions/setup-gcloud@v1
+        run: |
+            gcloud config set project ${{ secrets.GKE_PROJECT }}
+            gcloud container clusters get-credentials "deel-cluster" --zone us-east5-a
      
       #- id: 'gcloud'
       #  name: 'gcloud'
