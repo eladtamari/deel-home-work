@@ -110,4 +110,4 @@ tolerations: []
 
 affinity: {}
 
-DEPLOY_ENVIRONMENT: staging
+DEPLOY_ENVIRONMENT:
