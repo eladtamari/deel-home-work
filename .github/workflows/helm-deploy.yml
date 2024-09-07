@@ -27,6 +27,9 @@ jobs:
       #- id: 'gcloud'
       #  name: 'gcloud'
       #  run: |-
+      - name: Verify Kubernetes Context
+        run: |
+          kubectl config current-context || echo "Context not set!"
       - name: Install Helm
         run: |
           curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
