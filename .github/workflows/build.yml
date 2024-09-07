@@ -24,7 +24,7 @@ jobs:
   
 
   deploy:
-    needs: first-job
+    needs: push_to_registry
     runs-on: self-hosted
 
     permissions:
