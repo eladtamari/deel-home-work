@@ -1,6 +1,9 @@
 name: get secret from secret manager
 on:
-  push
+  workflow_run:
+    workflows: ["build"]
+    types:
+      - completed
 jobs:
   get-secret:
     runs-on: self-hosted
