@@ -3,13 +3,12 @@ on:
   push
 jobs:
   get-secret:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     permissions:
       contents: 'read'
       id-token: 'write'
 
-  
     steps:
       
       - uses: actions/checkout@v4
@@ -44,6 +43,4 @@ jobs:
         run: |
           ls -la
           helm upgrade --install my-release ./deel --namespace default --kube-context $(kubectl config current-context)
-            #gcloud secrets versions access "latest" --secret "my_secret"
-            #gcloud compute instances list
-    
+          
