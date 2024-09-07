@@ -18,7 +18,7 @@ jobs:
         uses: 'google-github-actions/auth@v1'
         with:
         
-          workload_identity_provider: 'projects/499613830332/locations/global/workloadIdentityPool/deel/providers/github'
+          workload_identity_provider: 'projects/499613830332/locations/global/workloadIdentityPool/githubactions/providers/github'
           service_account: 'github-actions@deel-home-task-1.iam.gserviceaccount.com'
       - name: 'setup cloud sdk'
         uses: google-github-actions/setup-gcloud@v1
