@@ -1,43 +1,29 @@
-name: Deploy Helm Chart to GKE
-
+name: get secret from secret manager
 on:
-  push:
-    #branches:
-     # - eladtamari-pathc-1
-
+  workflow_dispatch
 jobs:
-  deploy:
+  get-secret:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+  
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    #- name: Authenticate using service account key
-     # run: |
-      #  printf  "${{ secrets.SA_KEY }}"  > "/home/runner/gcloud-key.json"
-      #  cat "/home/runner/gcloud-key.json"
-      #  gcloud auth activate-service-account --key-file="/home/runner/gcloud-key.json"
-      #  gcloud config set project ${{ secrets.GKE_PROJECT }}
-    #- name: Set up GCloud CLI
-     # uses: google-github-actions/setup-gcloud@v1
-     # with:
-     #   version: '428.0.0'
-     #   service_account_key: ${{ secrets.SA_KEY }}
-     #   project_id: deel-home-task-1
-
-    - name: Authenticate to Google Cloud
-      uses: google-github-actions/auth@v1
-      with:
-        workload_identity_provider: "projects/${{ secrets.PROJECT_ID }}/locations/global/workloadIdentityPools/github-actions-pool/providers/github-provider"
-        service_account: "deel-sa@${{ secrets.GKE_PROJECT }}.iam.gserviceaccount.com"
-
-
-    - name: Authenticate to GKE
-      run: |
-        gcloud container clusters get-credentials deel-cluster --zone us-east5-a --project deel-home-task-1
-    - name: Install Helm
-      run: |
-        curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
-    - name: Deploy Helm Chart
-      run: |
-        helm upgrade --install my-release ./chart --namespace default
+      
+      - uses: actions/checkout@v3
+      - id: 'auth' 
+        name:  authenticate gke 
+        uses: 'google-github-actions/auth@v1'
+        with:
+        
+          workload_identity_provider: 'projects/499613830332/locations/global/workloadIdentityPool/deel/providers/github'
+          service_account: 'github-actions@deel-home-task-1.iam.gserviceaccount.com'
+      - name: 'setup cloud sdk'
+        uses: google-github-actions/setup-gcloud@v1
+     
+      - id: 'gcloud'
+        name: 'gcloud'
+        run: |
+          gcloud secrets versions access "latest" --secret "my-secret"
