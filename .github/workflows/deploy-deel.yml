@@ -1,7 +1,7 @@
-name: get secret from secret manager
+name: deploy
 on:
   workflow_run:
-    workflows: ["Build and Push Docker Image to Docker Hub"]
+    workflows: ["build"]
     types:
       - completed
 jobs:
