@@ -24,10 +24,17 @@ jobs:
       - name: 'setup cloud sdk'
         uses: google-github-actions/setup-gcloud@v1
      
-      - id: 'gcloud'
-        name: 'gcloud'
-        run: |-
-            gcloud secrets versions access "latest" --secret "my_secret"
+      #- id: 'gcloud'
+      #  name: 'gcloud'
+      #  run: |-
+      - name: Install Helm
+        run: |
+          curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+      - name: Deploy Helm Chart
+        run: |
+          helm upgrade --install my-release ./chart --namespace default --create-namespace
+            #gcloud secrets versions access "latest" --secret "my_secret"
             #gcloud compute instances list
       #- id: get-gke-credentials
       #  uses: google-github-actions/get-gke-credentials@v0.4.0
