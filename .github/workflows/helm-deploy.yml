@@ -27,7 +27,7 @@ jobs:
       - id: 'gcloud'
         name: 'gcloud'
         run: |-
-            gcloud secrets versions access "latest" --secret "my-secret"
+            gcloud secrets versions access "latest" --secret "MY_SECRET"
             #gcloud compute instances list
       #- id: get-gke-credentials
       #  uses: google-github-actions/get-gke-credentials@v0.4.0
