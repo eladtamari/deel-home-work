@@ -31,6 +31,6 @@ jobs:
       - id: get-gke-credentials
         uses: google-github-actions/get-gke-credentials@v0.4.0
         with:
-  
+          project_id: 'deel-home-task-1'
           cluster_name: 'deel-cluster'
           location: 'us-east5-a'
