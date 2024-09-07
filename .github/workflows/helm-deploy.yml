@@ -12,19 +12,25 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-    - name: Authenticate using service account key
-      run: |
-        printf  "${{ secrets.SA_KEY }}"  > "/home/runner/gcloud-key.json"
-        cat "/home/runner/gcloud-key.json"
-        gcloud auth activate-service-account --key-file="/home/runner/gcloud-key.json"
-        gcloud config set project ${{ secrets.GKE_PROJECT }}
+    #- name: Authenticate using service account key
+     # run: |
+      #  printf  "${{ secrets.SA_KEY }}"  > "/home/runner/gcloud-key.json"
+      #  cat "/home/runner/gcloud-key.json"
+      #  gcloud auth activate-service-account --key-file="/home/runner/gcloud-key.json"
+      #  gcloud config set project ${{ secrets.GKE_PROJECT }}
     #- name: Set up GCloud CLI
      # uses: google-github-actions/setup-gcloud@v1
      # with:
      #   version: '428.0.0'
      #   service_account_key: ${{ secrets.SA_KEY }}
      #   project_id: deel-home-task-1
-    
+
+    - name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v1
+      with:
+        workload_identity_provider: "projects/${{ secrets.PROJECT_ID }}/locations/global/workloadIdentityPools/github-actions-pool/providers/github-provider"
+        service_account: "github-actions-sa@${{ secrets.GKE_PROJECT }}.iam.gserviceaccount.com"
+
 
     - name: Authenticate to GKE
       run: |
