@@ -1,26 +1,29 @@
-name: deploy-deel
+name: get secret from secret manager
 on:
-  deployment
-env:
-  APP_NAME: deel
-
+  workflow_dispatch
 jobs:
-  deploy-staging:
+  get-secret:
     runs-on: ubuntu-latest
-    env:
-      DEPLOY_ENVIRONMENT: staging
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+  
     steps:
-      -
-        uses: actions/checkout@v2
-      -
-        uses: jmagnusson/deploy-helm-gke-action@v1
+      
+      - uses: actions/checkout@v3
+      - id: 'auth' 
+        name:  authenticate gke 
+        uses: 'google-github-actions/auth@v1'
         with:
-          docker-image-repo: ${{ secrets.GITHUB_USERNAME }}/${{ secrets.GITHUB_TOKEN }}
-          docker-image-tag: ${{ github.sha }}
-          helm-release-name: ${{ env.APP_NAME }}
-          helm-chart-path: ./deel/${{ env.APP_NAME }}
-          helm-vars-folder: ${{ env.DEPLOY_ENVIRONMENT }}
-          gke-project: deel-home-task-1
-          gke-cluster: deel-cluster
-          gke-zone: us-east5-a
-          gke-sa-key: ${{ secrets.KUBECONFIG }}
+        
+          workload_identity_provider: 'projects/499613830332/locations/global/workloadIdentityPool/deel/providers/github'
+          service_account: 'github-actions@deel-home-task-1.iam.gserviceaccount.com'
+      - name: 'setup cloud sdk'
+        uses: google-github-actions/setup-gcloud@v1
+     
+      - id: 'gcloud'
+        name: 'gcloud'
+        run: |
+          gcloud secrets versions access "latest" --secret "my-secret"
