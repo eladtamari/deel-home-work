@@ -43,4 +43,3 @@ jobs:
         run: |
           ls -la
           helm upgrade --install my-release ./deel --namespace default --kube-context $(kubectl config current-context)
-          
