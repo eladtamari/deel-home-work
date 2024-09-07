@@ -1,6 +1,6 @@
 name: get secret from secret manager
 on:
-  workflow_dispatch
+  push
 jobs:
   get-secret:
     runs-on: ubuntu-latest
