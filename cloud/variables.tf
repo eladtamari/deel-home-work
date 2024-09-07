@@ -20,7 +20,7 @@ variable "ZONE" {
 
 variable "TOKEN" {
   type    = string
-  default = "deel-home-task-1-9105f24da8d6.json"
+  default = "deel-home-task-1-8c9985d43a7f.json"
 }
 
 #CLUSTER

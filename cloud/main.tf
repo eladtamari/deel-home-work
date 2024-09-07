@@ -11,7 +11,7 @@ terraform {
 provider "google" {
   region      = var.REGION
   project     = "deel-home-task-1"
-  credentials = file("deel-home-task-1-9105f24da8d6.json")
+  credentials = file("deel-home-task-1-8c9985d43a7f.json")
   zone        = var.ZONE
 
 }
@@ -112,7 +112,7 @@ resource "google_compute_address" "my_internal_ip_addr" {
 
 
 resource "google_compute_image" "default" {
-  name = "jump-host"
+  name = var.JUMP_SERVER_NAME
   project = var.PROJECT_NAME
   #family = null  # Specify if the image is part of an image family
 
@@ -121,12 +121,12 @@ resource "google_compute_image" "default" {
   #   source = "https://storage.cloud.google.com/images_saips/jumpserver_1.tar.gz"
   # }
   #source_image = "https://storage.cloud.google.com/images_saips/jumpserver_1.tar.gz"
-  source_image = "images/jumpserver-1"
+  source_image = "images/jumpserver-image"
 }
 resource "google_compute_instance" "default" {
   project      = var.PROJECT_NAME
   zone         = var.ZONE
-  name         = var.JUMP_MACHINE_NAME
+  name         = var.JUMP_SERVER_NAME
   machine_type = var.JUMP_MACHINE_TYPE
    
   
