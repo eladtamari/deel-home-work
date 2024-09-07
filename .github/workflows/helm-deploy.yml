@@ -34,7 +34,7 @@ jobs:
       - name: Deploy Helm Chart
         run: |
           ls -la
-          helm upgrade --install my-release ./deel-home-work/deel --namespace default --create-namespace
+          helm upgrade --install my-release ./deel --namespace default
             #gcloud secrets versions access "latest" --secret "my_secret"
             #gcloud compute instances list
       #- id: get-gke-credentials
