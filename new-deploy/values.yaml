@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: app3
+  repository: 0254/deel-app
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "latest"
 
 imagePullSecrets: []
 nameOverride: ""
