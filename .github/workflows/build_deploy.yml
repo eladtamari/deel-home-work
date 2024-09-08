@@ -66,10 +66,13 @@ jobs:
           curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
       - name: Deploy Helm Chart
         run: |
-          
+          helm repo add bitnami https://charts.bitnami.com/bitnami
+          helm repo update
           helm upgrade --install my-release ./new-deploy --namespace default --kube-context $(kubectl config current-context) --set db_user=${{secrets.DB_USER}} --set db_pass=${{secrets.DB_PASS}}
+          
           kubectl port-forward --namespace default svc/my-mongodb-1 27017:27017 &
           mongosh --host 127.0.0.1 --authenticationDatabase ${{secrets.DB_USER}} -p ${{secrets.DB_PASS}} &
+          
           helm install my-mongodb-1 bitnami/mongodb --set auth.username=${{secrets.DB_USER}} --set auth.password=${{secrets.DB_PASS}} --set auth.database=deel
 
 
