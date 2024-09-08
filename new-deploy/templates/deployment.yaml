@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "deel.fullname" . }}
+  name: {{ include "new-deploy.fullname" . }}
   labels:
-    {{- include "deel.labels" . | nindent 4 }}
+    {{- include "new-deploy.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "deel.selectorLabels" . | nindent 6 }}
+      {{- include "new-deploy.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,7 +18,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "deel.labels" . | nindent 8 }}
+        {{- include "new-deploy.labels" . | nindent 8 }}
         {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
@@ -27,7 +27,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "deel.serviceAccountName" . }}
+      serviceAccountName: {{ include "new-deploy.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -50,6 +50,11 @@ spec:
           volumeMounts:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          env:
+            - name: db_user
+              value: "{{ .Values.db_user }}"
+            - name: db_pass
+              value: "{{ .Values.db_pass }}"
       {{- with .Values.volumes }}
       volumes:
         {{- toYaml . | nindent 8 }}

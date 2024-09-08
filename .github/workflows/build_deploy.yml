@@ -1,15 +1,39 @@
-name: get secret from secret manager
-on:
-  push
+name: build
+
+on: push
 jobs:
-  get-secret:
+  push_to_registry:
+    name: push docker image to hub
+    runs-on: ubuntu-latest
+    steps:
+      - name: check repository
+        uses: actions/checkout@v4
+
+      - name: login to docker registry
+        uses: docker/login-action@v3
+        with:
+          username: ${{secrets.DOCKERHUB_USERNAME}}
+          password: ${{secrets.DOCKERHUB_TOKEN}}
+
+      - name: build and push docker image to registry
+        uses: docker/build-push-action@v5
+        with:
+          context: ./
+          push: true
+          tags: 0254/deel-app:latest
+          build-args: |
+            db_user=${{secrets.DB_USER}}
+            db_pass=${{secrets.DB_PASS}}
+         
+
+  deploy:
+    needs: push_to_registry
     runs-on: self-hosted
 
     permissions:
       contents: 'read'
       id-token: 'write'
 
-  
     steps:
       
       - uses: actions/checkout@v4
@@ -42,8 +66,13 @@ jobs:
           curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
       - name: Deploy Helm Chart
         run: |
-          ls -la
-          helm upgrade --install my-release ./deel --namespace default --kube-context $(kubectl config current-context)
-            #gcloud secrets versions access "latest" --secret "my_secret"
-            #gcloud compute instances list
-    
+          helm repo add bitnami https://charts.bitnami.com/bitnami
+          helm repo update
+          helm upgrade --install my-release ./new-deploy --namespace default --kube-context $(kubectl config current-context) --set db_user=${{secrets.DB_USER}} --set db_pass=${{secrets.DB_PASS}}
+          
+          kubectl port-forward --namespace default svc/my-mongodb-1 27017:27017 &
+          mongosh --host 127.0.0.1 --authenticationDatabase ${{secrets.DB_USER}} -p ${{secrets.DB_PASS}} &
+          
+          helm install my-mongodb-1 bitnami/mongodb --set auth.username=${{secrets.DB_USER}} --set auth.password=${{secrets.DB_PASS}} --set auth.database=deel
+
+
