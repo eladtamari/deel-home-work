@@ -27,7 +27,7 @@ jobs:
          
 
   deploy:
-    needs: deploy-db
+    needs: push_to_registry
     runs-on: self-hosted
 
     permissions:
