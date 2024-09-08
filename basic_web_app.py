@@ -3,6 +3,9 @@ from flask import Flask
 from requests import get
 import pymongo
 
+
+MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017")
+
 app = Flask(__name__)
 
 # The route() function of the Flask class is a decorator, 
