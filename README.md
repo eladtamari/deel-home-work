@@ -1,14 +1,15 @@
 
-  1. gcloud use sa for authentication
+#  1. gcloud use sa for authentication
 
-  2. port-forward 
+#  2. port-forward 
   kubectl port-forward --namespace default svc/my-mongodb-1 27017:27017 &
   mongosh --host 127.0.0.1 --authenticationDatabase user -p pass &
 
 
   helm upgrade --install deel-croc-1 ./new-deploy --namespace default  --set db_user="user" --set db_pass="pass"
 
-CLI:
+# CLI: gcloud permmisions
+
 gcloud iam service-accounts add-iam-policy-binding "github-actions@deel-home-task-1.iam.gserviceaccount.com" \
 --project="deel-home-task-1" \
 --role="roles/iam.workloadIdentityUser" \
