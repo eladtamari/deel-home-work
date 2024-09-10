@@ -26,8 +26,12 @@ def reverse_public_ip():
     # Get the public IP of the provided IP address
     public_ip = get_public_ip(ip)
     rev_ip = ".".join(reversed(public_ip.split('.'))) 
+    print(rev_ip)
    
-    write_to_db(rev_ip)
+    # try:
+    #     write_to_db(rev_ip)
+    # except Exception as e:
+    #     print(f"An unexpected error occurred: {e}")
     
     if public_ip:
         # Return the public IP in the response
