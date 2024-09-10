@@ -3,7 +3,7 @@ name: build
 on: push
 jobs:
   push:
-    #needs: push_to_registry_gcr
+    name: push_to_registry_gcr
     runs-on: self-hosted
 
     permissions:
