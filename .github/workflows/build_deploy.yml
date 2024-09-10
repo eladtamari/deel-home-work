@@ -40,13 +40,13 @@ jobs:
 
       - name: Build Docker image
         run: |
-          sudo docker build -t gcr.io/${{ secrets.GKE_PROJECT }}/deel-reg:latest .
+          sudo docker build -t us-east5-docker.pkg.dev/${{ secrets.GKE_PROJECT }}/deel-reg:latest .
         env:
           PROJECT_ID: ${{ secrets.GKE_PROJECT }}
 
       - name: Push Docker image to GCR
         run: |
-          sudo docker push gcr.io/${{ secrets.GKE_PROJECT }}/deel-reg:latest
+          sudo docker push us-east5-docker.pkg.dev/${{ secrets.GKE_PROJECT }}/deel-reg:latest
         env:
           PROJECT_ID: ${{ secrets.GKE_PROJECT }}
     
