@@ -34,15 +34,16 @@ jobs:
             gcloud container clusters get-credentials "deel-cluster" --zone us-east5-a
       
      
-      - uses: github-actions-sa/push-to-gcr-github-action@v5-rc1
+      - uses: eladtamari/deel-home-work@v5-rc1
         with:
             # gcloud_service_key: ${{ secrets.GCLOUD_SERVICE_KEY }} # can be base64 encoded or plain text || not needed if you use google-github-actions/auth
             registry: gcr.io
             project_id: ${{ secrets.GKE_PROJECT }}
-            image_name: backend
+            image_name: deel-reg
             image_tag: latest,v1
             dockerfile: ../
             context: .
+            target: build
     
       
             
