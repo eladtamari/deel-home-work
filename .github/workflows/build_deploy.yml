@@ -71,7 +71,7 @@ jobs:
          
 
   deploy:
-    needs: push_to_registry_gcr
+    needs: push
     runs-on: self-hosted
 
     permissions:
