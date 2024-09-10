@@ -62,8 +62,8 @@ jobs:
       - name: login to docker registry
         uses: docker/login-action@v3
         with:
-          username: ${{secrets.DOCKERHUB_USERNAME}}
-          password: ${{secrets.DOCKERHUB_TOKEN}}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: build and push docker image to registry
         uses: docker/build-push-action@v5
@@ -114,12 +114,11 @@ jobs:
       - name: Install Helm
         run: |
           curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
-      - name: Docker Hub Login
-        run: |
-          echo "${{ secrets.DOCKERHUB_USERNAME }}" | docker login -u "${{secrets.DOCKERHUB_TOKEN}}" --password-stdin
-        env:
-          DOCKER_USERNAME: ${{secrets.DOCKERHUB_USERNAME}}
-          DOCKER_PASSWORD: ${{secrets.DOCKERHUB_TOKEN}}
+      - name: login to docker registry
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Deploy Helm Chart
         run: |
           helm repo add bitnami https://charts.bitnami.com/bitnami
@@ -127,9 +126,9 @@ jobs:
           
           helm upgrade --install my-release ./new-deploy --namespace default --kube-context $(kubectl config current-context) --set db_user=${{secrets.DB_USER}} --set db_pass=${{secrets.DB_PASS}}
           
-          helm install my-mongodb-2 bitnami/mongodb --set auth.username=${{secrets.DB_USER}} --set auth.password=${{secrets.DB_PASS}} --set auth.database=deel
+          helm install my-mongodb-3 bitnami/mongodb --set auth.username=${{secrets.DB_USER}} --set auth.password=${{secrets.DB_PASS}} --set auth.database=deel
 
-          kubectl port-forward --namespace default svc/my-mongodb-2 27017:27017 &
+          kubectl port-forward --namespace default svc/my-mongodb-3 27017:27017 &
           mongosh --host 127.0.0.1 --authenticationDatabase ${{secrets.DB_USER}} -p ${{secrets.DB_PASS}} &
           
           
